@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - andreasflowers</title>
+    <!-- SDK de EmailJS -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #fce4ec;
+            color: #6a1b9a;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .carrito-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #ad1457;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .productos-carrito {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .producto-card {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fce4ec;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .producto-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #e91e63;
+        }
+
+        .producto-info h3 {
+            color: #880e4f;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .producto-info p {
+            color: #6a1b9a;
+            font-size: 1rem;
+        }
+
+        .cantidad-controles {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #ad1457;
+            transform: scale(1.05);
+        }
+
+        .eliminar-btn {
+            background-color: #f50057;
+        }
+
+        .eliminar-btn:hover {
+            background-color: #c51162;
+        }
+
+        .total-seccion {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f8bbd0;
+        }
+
+        .total-seccion h2 {
+            color: #880e4f;
+            font-size: 1.5rem;
+        }
+
+        .botones-accion {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 6%;
+            left: 10%;
+            width: 100%;
+            height: 100%;
+            
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-contenido {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            animation: slideIn 0.3s ease-in-out;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .cerrar-modal:hover {
+            color: #ff0000;
+        }
+
+        .formulario-contacto label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .formulario-contacto input, .formulario-contacto select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: 0.3s ease;
+        }
+
+        .formulario-contacto input:focus, .formulario-contacto select:focus {
+            border-color: #58a;
+            outline: none;
+            box-shadow: 0 0 5px rgba(88, 136, 170, 0.4);
+        }
+
+        .formulario-contacto .icono-input {
+            position: relative;
+        }
+
+        .formulario-contacto .icono-input input {
+            padding-left: 40px;
+        }
+
+        .formulario-contacto .icono-input i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #999;
+            transition: 0.3s ease;
+        }
+
+        .formulario-contacto .icono-input input:focus + i {
+            color: #58a;
+        }
+
+
+
+        .formulario-contacto h2 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .formulario-contacto .input-contenedor {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .producto-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .producto-card img {
+                margin: 0 auto;
+            }
+
+            .cantidad-controles {
+                justify-content: center;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="carrito-container">
+        <h1>Carrito de Compras</h1>
+        <div id="productos-carrito" class="productos-carrito">
+            <!-- Los productos se añadirán aquí dinámicamente -->
+        </div>
+        <div class="total-seccion">
+            <h2>Total: $<span id="total-carrito">0</span></h2>
+            <div class="botones-accion">
+                <button onclick="confirmarCompra()" id="confirmar-compra">Confirmar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del formulario -->
+    <div id="modal-formulario" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+            <h2>Complete sus datos</h2>
+            <form id="formulario-contacto" class="formulario-contacto">
+                <div class="icono-input">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" placeholder="Escribe tu nombre" required>
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="icono-input">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" placeholder="Ej: 3001234567" required>
+                    <i class="fa fa-phone"></i>
+                </div>
+                <div class="icono-input">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" placeholder="tuemail@email.com" required>
+                    <i class="fa fa-envelope"></i>
+                </div>
+                <div class="icono-input">
+                    <label for="address">Dirección:</label>
+                    <input type="text" id="address" placeholder="Tu dirección" required>
+                    <i class="fa fa-map-marker-alt"></i>
+                </div>
+
+                <div>
+                    <label for="document">Número de documento:</label>
+                    <input type="text" id="document" required>
+                  </div>
+                <div class="input-contenedor">
+                    <label for="payment-method">Método de pago:</label>
+                    <select id="payment-method" required>
+                        <option value="">Selecciona el método</option>
+                        <option value="cash">Efectivo</option>
+                        <option value="credit-card">Tarjeta de crédito</option>
+                        <option value="bank-transfer">Transferencia bancaria</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-enviar">Enviar pedido</button>
+            </form>
+        </div>
+    </div>
+    <script>
+    // Inicializar EmailJS - REEMPLAZA CON TU PUBLIC KEY
+    (function() {
+        emailjs.init("vdRQPV8vY61B56kDS"); // Configura EmailJS con la clave pública para permitir el envío de correos.
+    })();
+    
+    // Función para cargar los productos del carrito
+    function cargarCarrito() {
+        const productosContainer = document.getElementById('productos-carrito'); // Obtiene el contenedor donde se mostrarán los productos.
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || {}; // Recupera el carrito del almacenamiento local o inicializa uno vacío si no existe.
+        let total = 0; // Variable para almacenar el total del carrito.
+    
+        productosContainer.innerHTML = ''; // Limpia el contenedor antes de agregar los productos.
+    
+        // Recorre cada producto en el carrito.
+        for (let [nombre, item] of Object.entries(carrito)) {
+            const subtotal = item.precio * item.cantidad; // Calcula el subtotal por producto.
+            total += subtotal; // Suma el subtotal al total general.
+    
+            // Crea el HTML para cada producto.
+            const productoHTML = `
+                <div class="producto-card">
+                    <img src="${item.imagen}" alt="${nombre}"> <!-- Imagen del producto -->
+                    <div class="producto-info">
+                        <h3>${nombre}</h3> <!-- Nombre del producto -->
+                        <p>Precio: $${item.precio}</p> <!-- Precio del producto -->
+                    </div>
+                    <div class="cantidad-controles">
+                        <button onclick="actualizarCantidad('${nombre}', ${item.cantidad - 1})">-</button> <!-- Botón para disminuir cantidad -->
+
+                        <span>${item.cantidad}</span> <!-- Cantidad actual -->
+                        <button onclick="actualizarCantidad('${nombre}', ${item.cantidad + 1})">+</button> <!-- Botón para aumentar cantidad -->
+                    </div>
+                    <button class="eliminar-btn" onclick="eliminarProducto('${nombre}')">Eliminar</button> <!-- Botón para eliminar producto -->
+                </div>
+            `;
+    
+            productosContainer.innerHTML += productoHTML; // Agrega el producto al contenedor.
+        }
+    
+        document.getElementById('total-carrito').textContent = total; // Actualiza el total en la interfaz.
+    }
+    
+    // Función para actualizar la cantidad de un producto
+    function actualizarCantidad(nombre, nuevaCantidad) {
+        if (nuevaCantidad < 1) return; // Si la nueva cantidad es menor que 1, no hace nada.
+    
+        let carrito = JSON.parse(localStorage.getItem('carrito')); // Obtiene el carrito actual del almacenamiento local.
+        carrito[nombre].cantidad = nuevaCantidad; // Actualiza la cantidad del producto en el carrito.
+        localStorage.setItem('carrito', JSON.stringify(carrito)); // Guarda el carrito actualizado en el almacenamiento local.
+        cargarCarrito(); // Recarga la visualización del carrito.
+    }
+    
+    // Función para eliminar un producto
+    function eliminarProducto(nombre) {
+        let carrito = JSON.parse(localStorage.getItem('carrito')); // Obtiene el carrito actual del almacenamiento local.
+        delete carrito[nombre]; // Elimina el producto del carrito.
+        localStorage.setItem('carrito', JSON.stringify(carrito)); // Guarda el carrito actualizado en el almacenamiento local.
+        cargarCarrito(); // Recarga la visualización del carrito.
+    }
+    
+    // Función para mostrar el modal
+    function confirmarCompra() {
+        const total = document.getElementById('total-carrito').textContent; // Obtiene el total del carrito.
+        if (total > 0) { // Si hay productos en el carrito...
+            document.getElementById('modal-formulario').style.display = 'block'; // Muestra el modal de confirmación de compra.
+        } else { // Si el carrito está vacío...
+            alert('El carrito está vacío'); // Muestra un mensaje de alerta.
+        }
+    }
+    
+    // Función para cerrar el modal
+    function cerrarModal() {
+        document.getElementById('modal-formulario').style.display = 'none'; // Oculta el modal.
+    }
+    
+    // Agrega un listener al formulario de contacto para manejar el evento de envío.
+    document.getElementById('formulario-contacto').addEventListener('submit', function(e) {
+        e.preventDefault(); // Previene que el formulario se envíe de forma predeterminada.
+    
+        // Obtiene los valores de los campos del formulario.
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const telefono = document.getElementById('telefono').value;
+        const direccion = document.getElementById('address').value;
+        const documento = document.getElementById('document').value;
+        const metodoPago = document.getElementById('payment-method').value;
+    
+        // Obtener los productos del carrito
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || {}; // Recupera el carrito o lo inicializa vacío.
+        let tablaProductos = ''; // Variable para almacenar los detalles de los productos.
+    
+        let total = 0; // Inicializa el total general.
+        for (let [nombreProducto, item] of Object.entries(carrito)) { // Recorre los productos en el carrito.
+            const subtotal = item.precio * item.cantidad; // Calcula el subtotal por producto.
+            total += subtotal; // Suma el subtotal al total general.
+    
+            // Agrega los detalles de cada producto al mensaje.
+            tablaProductos += `
+                Producto: ${nombreProducto}
+                Cantidad: ${item.cantidad}
+                Precio: $${item.precio}
+                Subtotal: $${subtotal}\n\n`;
+        }
+    
+        // Deshabilitar el botón mientras se procesa
+        const btnEnviar = document.querySelector('.btn-enviar'); // Obtiene el botón de enviar.
+        btnEnviar.disabled = true; // Deshabilita el botón.
+        btnEnviar.textContent = 'Procesando...'; // Cambia el texto del botón.
+    
+        // Crear promesas para ambos envíos
+        const clientePromise = emailjs.send('service_pnge1q9', 'template_syi4llq', {
+            to_name: nombre,
+            to_email: email, // Usar el email del cliente
+            user_phone: telefono,
+            customer_documento: documento,
+            customer_direccion: direccion,
+            customer_payment_method: metodoPago,
+            purchase_details: tablaProductos,
+            total_amount: total
+        });
+    
+        const adminPromise = emailjs.send('service_pnge1q9', 'template_dspjvwk', {
+            admin_email: 'jamypiter123@gmail.com',
+            customer_name: nombre,
+            customer_email: email,
+            customer_phone: telefono,
+            customer_documento: documento,
+            customer_direccion: direccion,
+            customer_payment_method: metodoPago,
+            purchase_details: tablaProductos,
+            total_amount: total
+        });
+    
+        // Enviar ambos correos en paralelo
+        Promise.all([clientePromise, adminPromise])
+            .then(function() {
+                alert('¡Gracias por tu compra! Te hemos enviado un correo de confirmación.'); // Mensaje de éxito.
+                localStorage.removeItem('carrito'); // Limpia el carrito.
+                document.getElementById('modal-formulario').style.display = 'none'; // Cierra el modal.
+                cargarCarrito(); // Recarga la visualización del carrito.
+                window.location.href = 'index.html'; // Redirige a la página principal.
+            })
+            .catch(function(error) {
+                console.error('Error:', error); // Imprime el error en la consola.
+                alert('Error al procesar tu compra. Por favor, intenta nuevamente.'); // Muestra un mensaje de error.
+            })
+            .finally(function() {
+                btnEnviar.disabled = false; // Habilita el botón nuevamente.
+                btnEnviar.textContent = 'Enviar pedido'; // Restaura el texto del botón.
+            });
+    });
+    
+    // Cargar el carrito cuando se carga la página
+    document.addEventListener('DOMContentLoaded', cargarCarrito); // Llama a `cargarCarrito` al cargar la página.
+    
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('modal-formulario')) { // Si el clic ocurre fuera del modal...
+            cerrarModal(); // Cierra el modal.
+        }
+    };
+
+    
+</script>
+    
+</body>
+</html>

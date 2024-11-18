@@ -1,0 +1,179 @@
+/* Reset básico y estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Contenedor principal */
+.contenedor {
+    background-image: url("./img/3-1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; /* Cambiado de 'contain' a 'cover' */
+    background-position: center; /* Añadido para centrar la imagen */
+    width: 100%; /* Asegura que tome todo el ancho disponible */
+    height: 700px;
+    position: relative;
+    max-width: 100%; /* Previene que se desborde */
+}
+
+/* Estilos del header */
+header {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+h1 {
+    margin-left: 50px;
+}
+
+.flowr {
+    color: rgb(103, 17, 31);
+    margin-left: 10px;
+}
+
+/* Navegación */
+nav {
+    margin-left: auto; /* Cambiado para mejor responsive */
+    margin-right: 50px; /* Añadido para mantener consistencia con el margen izquierdo */
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav li {
+    padding-right: 100px;
+    list-style: none;
+}
+
+nav li:last-child {
+    padding-right: 0; /* El último elemento no necesita padding a la derecha */
+}
+
+nav a {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: palevioletred;
+}
+
+/* Textos decorativos */
+.sonrisas {
+    position: absolute;
+    bottom: 400px;
+    left: 50%; /* Centrado horizontal */
+    transform: translateX(-50%); /* Ajuste fino del centrado */
+    font-family: "Dancing Script", cursive;
+    font-size: 80px;
+    color: rgb(197, 101, 117);
+    font-optical-sizing: auto;
+    font-style: normal;
+    text-align: center; /* Asegura que el texto esté centrado */
+}
+
+.pétalos {
+    position: absolute;
+    bottom: 300px;
+    left: 50%; /* Centrado horizontal */
+    transform: translateX(-50%); /* Ajuste fino del centrado */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50px;
+    text-align: center; /* Asegura que el texto esté centrado */
+}
+
+/* Footer */
+.pink-footer {
+    background-color: #FFD1DC;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    width: 100%;
+    position: absolute;
+    top: 90%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.footer-info, 
+.social-media {
+    flex: 1;
+}
+
+.footer-info h3, 
+.social-media h3 {
+    color: #FF1493;
+    margin-bottom: 1rem;
+}
+
+.social-media ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.social-media ul li {
+    margin-bottom: 0.5rem;
+}
+
+.social-media ul li a {
+    text-decoration: none;
+    color: #FF69B4;
+    transition: color 0.3s ease;
+}
+
+.social-media ul li a:hover {
+    color: #FF1493;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #FFC0CB;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1024px) {
+    nav {
+        margin-left: 300px;
+    }
+    
+    nav li {
+        padding-right: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+    }
+    
+    nav {
+        margin: 20px auto;
+    }
+    
+    .sonrisas {
+        font-size: 60px;
+    }
+    
+    .pétalos {
+        font-size: 40px;
+    }
+}

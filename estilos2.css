@@ -1,0 +1,263 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #F5F5F7;
+}
+.contenedor-principal{
+    display: flex;
+    justify-content: space-around;
+}
+
+.con1 img{
+    height: 300px;
+    width: 300px;
+    border-radius: 20px;
+    
+}
+button {
+    padding: 10px 15px;
+    background-color: #d81b60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+
+.p1{
+    font-size: 20px;
+    color: #653e3e;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+    }
+    
+    .p2{
+        font-size: 20px;
+        color: #653e3e;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    
+        }
+
+        .p3{
+            font-size: 20px;
+            color: #653e3e;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        
+            }
+            
+            .p4{
+                font-size: 20px;
+                color: #653e3e;
+                margin-top: 10px;
+                margin-bottom: 5px;
+            
+                }
+
+.eterno img{
+    height: 300px;
+    width: 300px;
+    border-radius: 20px;
+
+}
+.azul img{
+    height: 300px;
+    width: 300px;
+    border-radius: 20px;
+}
+.rosadaa img{
+    height: 300px;
+    width: 300px;
+    border-radius: 20px;
+}
+
+.contenedor li{
+    list-style: none;
+
+}
+.contenedor a{
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+}
+.contenedor a:hover{
+    color: palevioletred;
+}
+
+
+
+.main-header {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.logo .flowr {
+    color: #FF69B4;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    color: #FF69B4;
+}
+h1{
+    margin-left: 50px;
+}
+
+
+.contenedor-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.producto {
+    position: relative;
+    width: 250px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.producto img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.producto p {
+    margin: 5px 0;
+}
+
+.descripcion {
+    height: 55%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 192, 203, 0.9); /* Rosa semitransparente */
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.producto:hover .descripcion {
+    opacity: 1;
+}
+
+.producto:hover {
+    transform: scale(1.05);
+}
+
+.descripcion p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+
+
+.flowr{
+    color : Orgb(94, 15, 28);
+    margin-left: 10px;
+}
+.titulo{
+    text-align: center;
+    margin-bottom: 40PX;
+    }
+
+    .pink-footer {
+        background-color: #FFD1DC;
+        padding: 2rem 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 5%;
+    }
+    
+    .footer-info, .social-media {
+        flex: 1;
+    }
+    
+    .footer-info h3, .social-media h3 {
+        color: #FF1493;
+        margin-bottom: 1rem;
+    }
+    
+    .social-media ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .social-media ul li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .social-media ul li a {
+        text-decoration: none;
+        color: #FF69B4;
+        transition: color 0.3s ease;
+    }
+    
+    .social-media ul li a:hover {
+        color: #FF1493;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #FFC0CB;
+    }
+
+
+   
