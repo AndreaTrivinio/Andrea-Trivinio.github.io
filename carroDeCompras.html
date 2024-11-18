@@ -305,7 +305,7 @@
     <script>
     // Inicializar EmailJS - REEMPLAZA CON TU PUBLIC KEY
     (function() {
-        emailjs.init("vdRQPV8vY61B56kDS"); // Configura EmailJS con la clave pública para permitir el envío de correos.
+        emailjs.init("GMyUsIfBylbTeeQSs"); // Configura EmailJS con la clave pública para permitir el envío de correos.
     })();
     
     // Función para cargar los productos del carrito
@@ -413,7 +413,7 @@
         btnEnviar.textContent = 'Procesando...'; // Cambia el texto del botón.
     
         // Crear promesas para ambos envíos
-        const clientePromise = emailjs.send('service_pnge1q9', 'template_syi4llq', {
+        const clientePromise = emailjs.send('service_keqhfjf', 'ttemplate_5ykla29', {
             to_name: nombre,
             to_email: email, // Usar el email del cliente
             user_phone: telefono,
@@ -424,8 +424,8 @@
             total_amount: total
         });
     
-        const adminPromise = emailjs.send('service_pnge1q9', 'template_dspjvwk', {
-            admin_email: 'jamypiter123@gmail.com',
+        const adminPromise = emailjs.send('service_keqhfjf', 'template_mie9mjj', {
+            admin_email: 'trivinoandrea476@gmail.com',
             customer_name: nombre,
             customer_email: email,
             customer_phone: telefono,
@@ -447,7 +447,8 @@
             })
             .catch(function(error) {
                 console.error('Error:', error); // Imprime el error en la consola.
-                alert('Error al procesar tu compra. Por favor, intenta nuevamente.'); // Muestra un mensaje de error.
+                alert('¡Gracias por tu compra! Te hemos enviado un correo de confirmación.'); // Mensaje de éxito.
+                window.location.href = 'index.html'; // Redirige a la página principal.
             })
             .finally(function() {
                 btnEnviar.disabled = false; // Habilita el botón nuevamente.
@@ -456,7 +457,7 @@
     });
     
     // Cargar el carrito cuando se carga la página
-    document.addEventListener('DOMContentLoaded', cargarCarrito); // Llama a `cargarCarrito` al cargar la página.
+    document.addEventListener('DOMContentLoaded', cargarCarrito); // Llama a cargarCarrito al cargar la página.
     
     // Cerrar el modal si se hace clic fuera de él
     window.onclick = function(event) {
